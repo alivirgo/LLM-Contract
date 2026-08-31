@@ -1,6 +1,7 @@
 # llm-contract
 
 [![npm version](https://img.shields.io/npm/v/llm-contract.svg)](https://www.npmjs.com/package/llm-contract)
+[![CI](https://github.com/alivirgo/llm-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/alivirgo/llm-contract/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 
