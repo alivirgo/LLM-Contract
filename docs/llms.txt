@@ -9,7 +9,7 @@ llm-contract lets developers define reusable behavioral requirements for AI outp
 - Documentation: https://alivirgo.github.io/LLM-Contract/
 - npm package: https://www.npmjs.com/package/llm-contract
 - GitHub repository: https://github.com/alivirgo/LLM-Contract
-- v0.9.0 release: https://github.com/alivirgo/LLM-Contract/releases/tag/v0.9.0
+- v0.9.1 release: https://github.com/alivirgo/LLM-Contract/releases/tag/v0.9.1
 - Launch article: https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56
 - License: MIT
 
@@ -46,7 +46,7 @@ Requires Node.js 18.18 or newer. The package exports ESM, CommonJS, and TypeScri
 - Citation assertions verify configured markers, patterns, or strings, not whether an external source is authentic.
 - The built-in JSON Schema adapter implements a deterministic subset, not the entire specification.
 - Repeated runs measure nondeterminism; they do not eliminate it.
-- Version 0.9.0 is a pre-1.0 release.
+- Version 0.9.1 is a pre-1.0 release.
 
 ## Best source for implementation details
 
