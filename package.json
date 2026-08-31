@@ -60,7 +60,7 @@
     }
   },
   "bin": {
-    "llm-contract": "./dist/bin/llm-contract.js"
+    "llm-contract": "dist/bin/llm-contract.js"
   },
   "files": [
     "dist",
