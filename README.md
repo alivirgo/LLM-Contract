@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/llm-contract.svg)](https://www.npmjs.com/package/llm-contract)
 [![CI](https://github.com/alivirgo/llm-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/alivirgo/llm-contract/actions/workflows/ci.yml)
+[![GitHub Package](https://img.shields.io/badge/GitHub%20Packages-%40alivirgo%2Fllm--contract-24292f?logo=github)](https://github.com/users/alivirgo/packages/npm/package/llm-contract)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 
@@ -53,6 +54,8 @@ npm install llm-contract
 # Optional schema validators:
 npm install zod
 ```
+
+The canonical package is [`llm-contract` on npmjs](https://www.npmjs.com/package/llm-contract). A public scoped mirror, [`@alivirgo/llm-contract`](https://github.com/users/alivirgo/packages/npm/package/llm-contract), is also published through GitHub Packages for authenticated GitHub registry workflows. Versioned tarballs are attached to [GitHub Releases](https://github.com/alivirgo/llm-contract/releases).
 
 ### 2. Define a Behavioral Contract
 
