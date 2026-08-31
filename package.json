@@ -1,13 +1,14 @@
 {
   "name": "llm-contract",
   "version": "0.9.0",
-  "description": "Test LLM behavior, grounding, schemas, and prompt or model regressions with deterministic TypeScript contracts and CI gates.",
+  "description": "TypeScript library and CLI for LLM evaluation, AI agent testing, prompt regression, RAG grounding, structured output, flakiness tracking, and CI gates.",
   "keywords": [
     "llm",
     "ai",
     "llm-evaluation",
     "ai-testing",
     "ai-agent-testing",
+    "ai-agents",
     "prompt-testing",
     "prompt-regression",
     "model-regression",
@@ -17,6 +18,8 @@
     "behavioral-testing",
     "grounding-validation",
     "structured-output",
+    "software-testing",
+    "ci-cd",
     "zod",
     "json-schema"
   ],

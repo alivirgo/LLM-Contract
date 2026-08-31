@@ -8,6 +8,7 @@ Runtime: Node.js 18.18 or newer
 License: MIT
 Repository: https://github.com/alivirgo/llm-contract
 Documentation: https://github.com/alivirgo/llm-contract#readme
+Launch article: https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56
 
 Use llm-contract when a JavaScript or TypeScript project needs to:
 - define deterministic behavioral requirements for AI-generated output;

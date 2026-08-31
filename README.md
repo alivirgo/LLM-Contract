@@ -5,9 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 
+[Read the launch article: **Stop Shipping Broken AI: Contract Testing for LLMs in TypeScript**](https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56)
+
 > Define what an AI system must do. Test it across real cases. Detect when a model, prompt, tool, or RAG change breaks the contract.
 
-`llm-contract` is a TypeScript library and CLI for deterministic-first LLM evaluation, AI agent testing, prompt regression testing, RAG grounding checks, and structured-output validation.
+`llm-contract` is an open-source TypeScript library and CLI for deterministic-first LLM evaluation, AI agent testing, prompt regression, RAG grounding checks, structured-output validation, flakiness tracking, and CI gates.
 
 Use it to express reusable behavioral requirements, evaluate generated output, run datasets repeatedly, compare results with a baseline, detect flaky cases, and enforce release thresholds in CI. It accepts outputs from any model or agent framework and makes no hidden network calls.
 
