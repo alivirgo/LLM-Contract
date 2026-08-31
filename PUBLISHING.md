@@ -25,11 +25,12 @@ The package is intended to be published publicly as the unscoped npm package
    Name availability is indicated by `npm view` returning `E404`. Review the dry-run
    file list before continuing.
 
-3. Publish the public package. npm will request a one-time password when the account
-   requires two-factor authentication.
+3. Publish the public package. When the account uses two-factor authentication for
+   writes, replace `<current-code>` with the fresh six-digit code from the account's
+   authenticator app. The code is short-lived; never commit or share it.
 
    ```sh
-   npm publish --access public
+   npm publish --access public --otp=<current-code>
    ```
 
 4. Verify the public release.
