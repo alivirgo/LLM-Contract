@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+.npm-cache/
+*.tgz
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+guide.txt

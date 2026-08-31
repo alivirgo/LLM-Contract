@@ -1,0 +1,28 @@
+[
+  {
+    "id": "case-support-1",
+    "description": "Handle return request with specific order and date",
+    "input": "I want to return order ORD-9921 purchased on 2026-08-15.",
+    "context": "Policy: Orders like ORD-9921 can be returned within 30 days of 2026-08-15. Prepaid label at returns.store.com.",
+    "metadata": {
+      "output": "```json\n{\n  \"reply\": \"You can return order ORD-9921 within 30 days of 2026-08-15 by visiting returns.store.com for a prepaid label.\",\n  \"category\": \"refund\",\n  \"requiresFollowUp\": false,\n  \"urgency\": \"low\"\n}\n```"
+    },
+    "baselineOutcome": {
+      "passed": true,
+      "score": 1.0
+    }
+  },
+  {
+    "id": "case-support-2",
+    "description": "Ask clarifying question when flight/booking ID is omitted",
+    "input": "Please change date for my flight.",
+    "context": "User profile has 2 active reservations.",
+    "metadata": {
+      "output": "{\n  \"reply\": \"Could you please clarify your booking ID and preferred new departure date so I can assist you?\",\n  \"category\": \"general\",\n  \"requiresFollowUp\": true,\n  \"urgency\": \"medium\"\n}"
+    },
+    "baselineOutcome": {
+      "passed": true,
+      "score": 1.0
+    }
+  }
+]

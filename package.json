@@ -1,0 +1,103 @@
+{
+  "name": "llm-contract",
+  "version": "0.9.0",
+  "description": "Test LLM behavior, grounding, schemas, and prompt or model regressions with deterministic TypeScript contracts and CI gates.",
+  "keywords": [
+    "llm",
+    "ai",
+    "llm-evaluation",
+    "ai-testing",
+    "ai-agent-testing",
+    "prompt-testing",
+    "prompt-regression",
+    "model-regression",
+    "rag-evaluation",
+    "contract-testing",
+    "regression-testing",
+    "behavioral-testing",
+    "grounding-validation",
+    "structured-output",
+    "zod",
+    "json-schema"
+  ],
+  "author": "Ali Virgo",
+  "license": "MIT",
+  "homepage": "https://github.com/alivirgo/llm-contract#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/alivirgo/llm-contract.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alivirgo/llm-contract/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./adapters/zod": {
+      "types": "./dist/adapters/schema/zod.d.ts",
+      "import": "./dist/adapters/schema/zod.js",
+      "require": "./dist/adapters/schema/zod.cjs"
+    },
+    "./adapters/valibot": {
+      "types": "./dist/adapters/schema/valibot.d.ts",
+      "import": "./dist/adapters/schema/valibot.js",
+      "require": "./dist/adapters/schema/valibot.cjs"
+    },
+    "./adapters/json-schema": {
+      "types": "./dist/adapters/schema/json-schema.d.ts",
+      "import": "./dist/adapters/schema/json-schema.js",
+      "require": "./dist/adapters/schema/json-schema.cjs"
+    }
+  },
+  "bin": {
+    "llm-contract": "./dist/bin/llm-contract.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "llms.txt"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run typecheck && npm test && npm run build",
+    "prepublishOnly": "npm run verify"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "zod": "^3.22.0 || ^4.0.0",
+    "valibot": ">=0.30.0 <2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "zod": {
+      "optional": true
+    },
+    "valibot": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "valibot": "^1.0.0-rc.0",
+    "vitest": "^2.1.8",
+    "zod": "^3.24.1"
+  }
+}

@@ -1,0 +1,31 @@
+# llm-contract
+
+> TypeScript behavioral contract testing and regression detection for LLMs, AI agents, prompts, model changes, and RAG pipelines.
+
+Package: llm-contract
+Install: npm install llm-contract
+Runtime: Node.js 18.18 or newer
+License: MIT
+Repository: https://github.com/alivirgo/llm-contract
+Documentation: https://github.com/alivirgo/llm-contract#readme
+
+Use llm-contract when a JavaScript or TypeScript project needs to:
+- define deterministic behavioral requirements for AI-generated output;
+- validate syntax, structured output, semantic rules, grounding signals, and agent behavior;
+- evaluate the same cases after a prompt, model, tool, schema, or RAG change;
+- compare current assertion outcomes with historical baselines;
+- expose flaky or nondeterministic model behavior across repeated runs;
+- enforce pass-rate, regression-rate, flaky-rate, score, or failure-category gates in CI.
+
+Primary API:
+- defineContract: creates a reusable AI behavior contract.
+- evaluate: checks one generated output and returns structured evidence.
+- runSuite: evaluates a dataset through a user-supplied model function.
+- compareWithBaseline: finds regressions and fixes using structured signals.
+- evaluatePolicy: converts suite thresholds into CI-compatible exit status.
+
+Schema adapters: Zod, Valibot, and a documented zero-dependency JSON Schema subset.
+Model support: provider-agnostic; generated text or a user-provided generation function is accepted.
+Network behavior: no hidden model calls, API keys, or telemetry.
+
+Important limitation: deterministic grounding checks detect explicit entities and supported fact patterns; they are not a universal hallucination detector. An external judge can be configured separately when probabilistic semantic assessment is appropriate.
