@@ -16,7 +16,7 @@ I built [`llm-contract`](https://www.npmjs.com/package/llm-contract) to test the
 npm install llm-contract
 ```
 
-The package is open source, TypeScript-first, framework-agnostic, and available on [GitHub](https://github.com/alivirgo/llm-contract).
+The package is open source, TypeScript-first, framework-agnostic, and available on [GitHub](https://github.com/alivirgo/LLM-Contract).
 
 ## The real regression problem with LLM applications
 
@@ -236,7 +236,7 @@ Define the contract before the next prompt or model change tells you what you fo
 
 **Install:** [`npm install llm-contract`](https://www.npmjs.com/package/llm-contract)
 
-**Source and documentation:** [github.com/alivirgo/llm-contract](https://github.com/alivirgo/llm-contract)
+**Source and documentation:** [alivirgo.github.io/LLM-Contract](https://alivirgo.github.io/LLM-Contract/)
 
 ---
 

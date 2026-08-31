@@ -1,12 +1,14 @@
 # llm-contract
 
 [![npm version](https://img.shields.io/npm/v/llm-contract.svg)](https://www.npmjs.com/package/llm-contract)
-[![CI](https://github.com/alivirgo/llm-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/alivirgo/llm-contract/actions/workflows/ci.yml)
+[![CI](https://github.com/alivirgo/LLM-Contract/actions/workflows/ci.yml/badge.svg)](https://github.com/alivirgo/LLM-Contract/actions/workflows/ci.yml)
 [![GitHub Package](https://img.shields.io/badge/GitHub%20Packages-%40alivirgo%2Fllm--contract-24292f?logo=github)](https://github.com/users/alivirgo/packages/npm/package/llm-contract)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 
 [Read the launch article: **Stop Shipping Broken AI: Contract Testing for LLMs in TypeScript**](https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56)
+
+[Explore the interactive documentation](https://alivirgo.github.io/LLM-Contract/) for the quickstart, validation pipeline, regression workflow, CI policies, reports, and honest limits.
 
 > Define what an AI system must do. Test it across real cases. Detect when a model, prompt, tool, or RAG change breaks the contract.
 
@@ -55,7 +57,7 @@ npm install llm-contract
 npm install zod
 ```
 
-The canonical package is [`llm-contract` on npmjs](https://www.npmjs.com/package/llm-contract). A public scoped mirror, [`@alivirgo/llm-contract`](https://github.com/users/alivirgo/packages/npm/package/llm-contract), is also published through GitHub Packages for authenticated GitHub registry workflows. Versioned tarballs are attached to [GitHub Releases](https://github.com/alivirgo/llm-contract/releases).
+The canonical package is [`llm-contract` on npmjs](https://www.npmjs.com/package/llm-contract). A public scoped mirror, [`@alivirgo/llm-contract`](https://github.com/users/alivirgo/packages/npm/package/llm-contract), is also published through GitHub Packages for authenticated GitHub registry workflows. Versioned tarballs are attached to [GitHub Releases](https://github.com/alivirgo/LLM-Contract/releases).
 
 ### 2. Define a Behavioral Contract
 

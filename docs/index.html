@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>LLM Testing &amp; Prompt Regression in TypeScript | llm-contract</title>
+    <meta
+      name="description"
+      content="Test LLMs and AI agents with TypeScript contracts. Validate structured output and RAG grounding, detect prompt regressions and flakiness, and gate CI."
+   >
+    <meta
+      name="keywords"
+      content="LLM evaluation, AI agent testing, prompt regression testing, RAG evaluation, contract testing, TypeScript, structured output validation"
+   >
+    <meta name="author" content="Ali Virgo">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://alivirgo.github.io/LLM-Contract/">
+    <link rel="describedby" href="./llms.txt" type="text/plain">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23161616'/%3E%3Cpath d='M17 17h30v30H17z' fill='none' stroke='%236cc644' stroke-width='5'/%3E%3Cpath d='m23 32 6 6 13-14' fill='none' stroke='%2379c0ff' stroke-width='5'/%3E%3C/svg%3E">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="llm-contract">
+    <meta property="og:title" content="Stop Shipping Broken AI — Contract-test LLM behavior">
+    <meta
+      property="og:description"
+      content="A deterministic-first TypeScript library and CLI for LLM evaluation, AI agent testing, prompt regression, RAG grounding, and CI gates."
+   >
+    <meta property="og:url" content="https://alivirgo.github.io/LLM-Contract/">
+    <meta property="og:image" content="https://alivirgo.github.io/LLM-Contract/assets/og-card.png">
+    <meta property="og:image:alt" content="llm-contract blocks a broken AI response before it reaches production">
+    <meta property="og:image:width" content="1672">
+    <meta property="og:image:height" content="941">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stop Shipping Broken AI — llm-contract">
+    <meta
+      name="twitter:description"
+      content="Define what your AI must do, run real cases, and catch behavioral regressions before release."
+   >
+    <meta name="twitter:image" content="https://alivirgo.github.io/LLM-Contract/assets/og-card.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Inter:wght@500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+   >
+    <link rel="stylesheet" href="./styles.css">
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('llm-contract-theme');
+        if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+      } catch (_) {}
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "llm-contract",
+        "alternateName": "LLM Contract",
+        "description": "TypeScript library and CLI for deterministic-first LLM evaluation, AI agent testing, prompt regression, RAG grounding checks, structured-output validation, flakiness tracking, and CI gates.",
+        "codeRepository": "https://github.com/alivirgo/LLM-Contract",
+        "downloadUrl": "https://www.npmjs.com/package/llm-contract",
+        "url": "https://alivirgo.github.io/LLM-Contract/",
+        "programmingLanguage": "TypeScript",
+        "runtimePlatform": "Node.js 18.18 or newer",
+        "softwareVersion": "0.9.0",
+        "license": "https://opensource.org/licenses/MIT",
+        "author": {
+          "@type": "Person",
+          "name": "Ali Virgo",
+          "url": "https://github.com/alivirgo"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is llm-contract?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "llm-contract is an open-source TypeScript library and CLI for defining behavioral requirements for LLM and AI agent output, evaluating real cases, comparing baselines, measuring flakiness, and enforcing CI policies."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does llm-contract call an AI model?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No hidden model or network calls are made. You provide the generated output to evaluate, or supply your own generation callback when running a suite."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does llm-contract detect every hallucination?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Its grounding checks compare identifiable claims in an output with the context you provide. They are transparent contract checks, not a universal truth engine."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which schema validators work with llm-contract?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The package includes adapters for Zod, Valibot, and a deterministic subset of JSON Schema, and supports custom contract logic."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to documentation</a>
+
+    <div class="release-bar">
+      <span class="release-pulse" aria-hidden="true"></span>
+      <span><strong>v0.9.0</strong> is live on npm</span>
+      <span aria-hidden="true">→</span>
+      <a href="https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56">Read the launch story</a>
+    </div>
+
+    <header class="topbar">
+      <button class="icon-button mobile-menu-button" id="menu-button" type="button" aria-label="Open documentation menu" aria-expanded="false" aria-controls="sidebar">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="brand" href="#overview" aria-label="llm-contract home">
+        <span class="brand-prompt">$</span>
+        <span>llm-contract</span>
+        <span class="version">v0.9.0</span>
+      </a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="https://www.npmjs.com/package/llm-contract">npm</a>
+        <a href="https://github.com/alivirgo/LLM-Contract/releases/tag/v0.9.0">release</a>
+        <a href="https://github.com/alivirgo/LLM-Contract" class="github-link" aria-label="GitHub repository">
+          GitHub
+          <span class="github-count" id="github-stars" aria-hidden="true">—</span>
+        </a>
+        <button class="theme-button" id="theme-button" type="button" aria-label="Switch color theme">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span id="theme-label">light</span>
+        </button>
+      </nav>
+    </header>
+
+    <div class="page-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+        <div class="search-wrap">
+          <span aria-hidden="true">/</span>
+          <label class="sr-only" for="doc-search">Filter documentation</label>
+          <input id="doc-search" type="search" placeholder="filter docs" autocomplete="off">
+          <kbd>⌘ K</kbd>
+        </div>
+
+        <nav class="side-nav" aria-label="Documentation sections">
+          <p class="nav-group-label">START</p>
+          <a href="#overview" data-search="overview introduction llm contract"><span>01</span>Overview</a>
+          <a href="#quickstart" data-search="quickstart install npm typescript"><span>02</span>Quickstart</a>
+          <a href="#contract" data-search="define contract behavior invariant assertion"><span>03</span>Contract anatomy</a>
+
+          <p class="nav-group-label">EVALUATE</p>
+          <a href="#layers" data-search="validation layers syntax schema semantics grounding behavior"><span>04</span>Validation layers</a>
+          <a href="#failures" data-search="failures evidence errors taxonomy"><span>05</span>Actionable failures</a>
+          <a href="#regression" data-search="regression suites datasets baseline stability flaky"><span>06</span>Regression suites</a>
+          <a href="#ci" data-search="ci policies gates release github actions"><span>07</span>CI policies</a>
+
+          <p class="nav-group-label">REFERENCE</p>
+          <a href="#cli" data-search="cli reports json junit html markdown terminal"><span>08</span>CLI &amp; reports</a>
+          <a href="#adapters" data-search="adapters zod valibot json schema provider model"><span>09</span>Adapters</a>
+          <a href="#limits" data-search="limits grounding hallucination truth honest"><span>10</span>Honest limits</a>
+          <a href="#faq" data-search="faq questions provider network open source"><span>11</span>FAQ</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div><span class="status-dot"></span> package online</div>
+          <a href="https://www.npmjs.com/package/llm-contract">npm i llm-contract ↗</a>
+        </div>
+      </aside>
+
+      <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+      <main class="content" id="content">
+        <section class="hero doc-section" id="overview" data-title="Overview">
+          <div class="breadcrumbs"><span>docs</span><b>/</b><span>overview</span></div>
+          <div class="eyebrow"><span class="eyebrow-mark">◆</span> BEHAVIORAL CONTRACT TESTING FOR AI</div>
+          <h1>Stop shipping<br><span>broken AI.</span></h1>
+          <p class="hero-copy">
+            Define what your AI must do. Test it against real cases. Catch prompt, model, tool, and RAG regressions before release.
+          </p>
+
+          <div class="hero-actions">
+            <button class="install-command copy-trigger" type="button" data-copy="npm install llm-contract" aria-label="Copy npm install command">
+              <span class="terminal-dollar">$</span>
+              <code>npm install llm-contract</code>
+              <span class="copy-state">copy</span>
+            </button>
+            <a class="button button-primary" href="#quickstart">Start testing <span>→</span></a>
+            <a class="button" href="https://github.com/alivirgo/LLM-Contract">View source ↗</a>
+          </div>
+
+          <div class="hero-stats" role="group" aria-label="Package facts">
+            <div><strong>6</strong><span>validation stages</span></div>
+            <div><strong>53</strong><span>automated tests</span></div>
+            <div><strong>4</strong><span>Node versions in CI</span></div>
+            <div><strong>0</strong><span>hidden network calls</span></div>
+          </div>
+
+          <section class="terminal-window" aria-label="Example evaluation output">
+            <div class="terminal-titlebar">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <span>support-contract.test.ts</span>
+              <button type="button" class="mini-copy copy-trigger" data-copy-target="hero-code">copy</button>
+            </div>
+            <pre id="hero-code"><code><span class="code-dim">// One contract. A real output. Evidence you can act on.</span>
+<span class="code-purple">const</span> result = <span class="code-purple">await</span> <span class="code-cyan">evaluate</span>(supportContract, {
+  input: { query: <span class="code-green">'Can I return this?'</span> },
+  context: <span class="code-green">'Returns are accepted within 30 days.'</span>,
+  output: modelResponse,
+});
+
+<span class="code-cyan">expect</span>(result.passed).toBe(<span class="code-orange">true</span>);
+<span class="code-dim">// failures include a code, path, explanation, and evidence</span></code></pre>
+            <div class="terminal-result">
+              <span class="pass-badge">PASS</span>
+              <span>schema</span><span>grounding</span><span>behavior</span>
+              <b>score 1.00</b>
+            </div>
+          </section>
+        </section>
+
+        <section class="doc-section" id="why" data-title="Why contracts">
+          <div class="section-kicker">THE GAP</div>
+          <h2>Valid JSON is not valid behavior.</h2>
+          <p class="section-lead">
+            Ordinary tests can verify deterministic code. AI systems also need explicit checks for meaning, grounding, refusal behavior, and change over time.
+          </p>
+          <div class="comparison-grid">
+            <article class="comparison-card weak">
+              <div class="card-label">schema-only</div>
+              <pre><code>{ "refundDays": <span class="code-orange">90</span> }</code></pre>
+              <p>Structurally valid. Factually wrong when the supplied policy says 30 days.</p>
+              <span class="card-outcome">× ships the bug</span>
+            </article>
+            <article class="comparison-card strong">
+              <div class="card-label">with llm-contract</div>
+              <pre><code><span class="code-red">FACT_CONTRADICTION</span>
+expected: 30 days
+observed: 90 days</code></pre>
+              <p>The contract fails with a stable code and the evidence behind it.</p>
+              <span class="card-outcome">✓ blocks the regression</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="doc-section" id="quickstart" data-title="Quickstart">
+          <div class="section-kicker">QUICKSTART</div>
+          <h2>From install to evidence in minutes.</h2>
+          <p class="section-lead">Install the package, define reusable requirements, then evaluate output produced by any model or agent stack.</p>
+
+          <div class="step-block">
+            <div class="step-number">01</div>
+            <div class="step-body">
+              <h3>Install</h3>
+              <div class="command-line">
+                <code><span>$</span> npm install llm-contract zod</code>
+                <button type="button" class="copy-trigger" data-copy="npm install llm-contract zod">copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-block">
+            <div class="step-number">02</div>
+            <div class="step-body">
+              <h3>Define and evaluate</h3>
+              <div class="code-block">
+                <div class="code-caption"><span>contract.ts</span><button type="button" class="copy-trigger" data-copy-target="quickstart-code">copy</button></div>
+                <pre id="quickstart-code"><code><span class="code-purple">import</span> { z } <span class="code-purple">from</span> <span class="code-green">'zod'</span>;
+<span class="code-purple">import</span> {
+  defineContract, evaluate, zodAdapter,
+  mustPreserveFacts, mustNotInvent,
+} <span class="code-purple">from</span> <span class="code-green">'llm-contract'</span>;
+
+<span class="code-purple">const</span> supportContract = <span class="code-cyan">defineContract</span>({
+  name: <span class="code-green">'support-answer'</span>,
+  schema: <span class="code-cyan">zodAdapter</span>(z.object({
+    answer: z.string(),
+    needsHuman: z.boolean(),
+  })),
+  invariants: [
+    <span class="code-cyan">mustPreserveFacts</span>({ threshold: <span class="code-orange">1</span> }),
+    <span class="code-cyan">mustNotInvent</span>({ mode: <span class="code-green">'strict'</span> }),
+  ],
+});
+
+<span class="code-purple">const</span> result = <span class="code-purple">await</span> <span class="code-cyan">evaluate</span>(supportContract, {
+  input: <span class="code-green">'What is the return window?'</span>,
+  context: <span class="code-green">'Returns are accepted within 30 days.'</span>,
+  output: modelResponse,
+});</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-info">
+            <span class="callout-icon">i</span>
+            <div><strong>Your model stays yours.</strong> `evaluate()` receives output you already generated; `runSuite()` accepts your generation callback. The package does not hide provider calls inside evaluation.</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="contract" data-title="Contract anatomy">
+          <div class="section-kicker">CONTRACT ANATOMY</div>
+          <h2>Requirements that read like intent.</h2>
+          <p class="section-lead">A contract combines normalization, structure, hard invariants, and weighted assertions under one reusable name.</p>
+          <div class="anatomy-grid">
+            <article>
+              <span class="anatomy-index">A</span>
+              <h3>Normalize conservatively</h3>
+              <p>Trim whitespace or unwrap code fences without silently rewriting meaning.</p>
+              <code>normalization</code>
+            </article>
+            <article>
+              <span class="anatomy-index">B</span>
+              <h3>Enforce structure</h3>
+              <p>Validate structured output through Zod, Valibot, or the built-in JSON Schema subset.</p>
+              <code>schema</code>
+            </article>
+            <article>
+              <span class="anatomy-index">C</span>
+              <h3>Block hard failures</h3>
+              <p>Invariants fail the contract when a non-negotiable behavior is broken.</p>
+              <code>invariants[]</code>
+            </article>
+            <article>
+              <span class="anatomy-index">D</span>
+              <h3>Score softer signals</h3>
+              <p>Weighted assertions contribute to a score without obscuring deterministic failures.</p>
+              <code>assertions[]</code>
+            </article>
+          </div>
+        </section>
+
+        <section class="doc-section" id="layers" data-title="Validation layers">
+          <div class="section-kicker">VALIDATION PIPELINE</div>
+          <h2>Six stages. One inspectable result.</h2>
+          <p class="section-lead">Each stage answers a different question, so a passing parser cannot mask a broken business rule.</p>
+          <ol class="pipeline">
+            <li><span>01</span><div><h3>Normalize</h3><p>Conservative cleanup only.</p></div><code>raw → normalized</code></li>
+            <li><span>02</span><div><h3>Syntactic</h3><p>Can the expected representation be parsed?</p></div><code>PARSE_ERROR</code></li>
+            <li><span>03</span><div><h3>Structural</h3><p>Does the output satisfy the declared shape?</p></div><code>SCHEMA_VIOLATION</code></li>
+            <li><span>04</span><div><h3>Semantic</h3><p>Are values, enums, ranges, and rules allowed?</p></div><code>NUMERIC_OUT_OF_BOUNDS</code></li>
+            <li><span>05</span><div><h3>Grounding</h3><p>Are identifiable claims supported by supplied context?</p></div><code>UNSUPPORTED_CLAIM</code></li>
+            <li><span>06</span><div><h3>Behavioral</h3><p>Did the system clarify, refuse, and cover required topics?</p></div><code>UNCERTAINTY_VIOLATION</code></li>
+          </ol>
+        </section>
+
+        <section class="doc-section" id="failures" data-title="Actionable failures">
+          <div class="section-kicker">FAILURE TAXONOMY</div>
+          <h2>Debug signals, not vague verdicts.</h2>
+          <p class="section-lead">Every failure can carry a stable code, exact path, human explanation, and supporting evidence for reports and CI.</p>
+          <ul class="failure-list">
+            <li><code>SCHEMA_VIOLATION</code><span>wrong shape or field type</span></li>
+            <li><code>UNSUPPORTED_CLAIM</code><span>claim absent from supplied context</span></li>
+            <li><code>FACT_CONTRADICTION</code><span>output conflicts with context</span></li>
+            <li><code>REQUIRED_TOPIC_MISSING</code><span>mandatory concept omitted</span></li>
+            <li><code>UNEXPECTED_REFUSAL</code><span>benign request incorrectly refused</span></li>
+            <li><code>UNCERTAINTY_VIOLATION</code><span>ambiguous input answered without clarification</span></li>
+          </ul>
+          <a class="inline-link" href="https://github.com/alivirgo/LLM-Contract#-structured-failure-taxonomy">Browse the complete failure taxonomy →</a>
+        </section>
+
+        <section class="doc-section" id="regression" data-title="Regression suites">
+          <div class="section-kicker">REGRESSION SUITES</div>
+          <h2>Know what changed before users do.</h2>
+          <p class="section-lead">Run a dataset through your generation function, compare it with historical outcomes, and repeat cases to expose nondeterminism.</p>
+          <div class="regression-flow" role="group" aria-label="Regression testing flow">
+            <div><span>01</span><b>cases.json</b><small>real inputs + context</small></div>
+            <i>→</i>
+            <div><span>02</span><b>your model</b><small>prompt / agent / RAG</small></div>
+            <i>→</i>
+            <div><span>03</span><b>contracts</b><small>repeat N times</small></div>
+            <i>→</i>
+            <div><span>04</span><b>baseline diff</b><small>regressions + fixes</small></div>
+          </div>
+          <div class="split-panel">
+            <div>
+              <div class="panel-heading"><span class="status-dot"></span> BASELINE COMPARISON</div>
+              <ul class="check-list">
+                <li><span>+</span> new failures</li>
+                <li><span>+</span> detected fixes</li>
+                <li><span>+</span> pass-rate change</li>
+                <li><span>+</span> score delta</li>
+              </ul>
+            </div>
+            <div>
+              <div class="panel-heading"><span class="status-dot cyan"></span> STABILITY</div>
+              <ul class="check-list">
+                <li><span>+</span> every attempt recorded</li>
+                <li><span>+</span> stability score 0–1</li>
+                <li><span>+</span> flaky cases surfaced</li>
+                <li><span>+</span> no retry-until-pass</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="ci" data-title="CI policies">
+          <div class="section-kicker">RELEASE GATES</div>
+          <h2>Make AI quality a merge condition.</h2>
+          <p class="section-lead">Policies translate suite evidence into a deterministic exit code for any CI provider.</p>
+          <div class="code-block">
+            <div class="code-caption"><span>ci-check.ts</span><button type="button" class="copy-trigger" data-copy-target="ci-code">copy</button></div>
+            <pre id="ci-code"><code><span class="code-purple">import</span> {
+  runSuite, evaluatePolicy, standardCIPolicy,
+} <span class="code-purple">from</span> <span class="code-green">'llm-contract'</span>;
+
+<span class="code-purple">const</span> suite = <span class="code-purple">await</span> <span class="code-cyan">runSuite</span>(
+  <span class="code-green">'support-v2'</span>, cases, generate,
+  { runsPerCase: <span class="code-orange">3</span>, concurrency: <span class="code-orange">4</span> },
+);
+
+<span class="code-purple">const</span> policy = <span class="code-cyan">evaluatePolicy</span>(suite, standardCIPolicy);
+process.exit(policy.exitCode);</code></pre>
+          </div>
+          <div class="policy-row">
+            <span>minimum pass rate</span><span>regression tolerance</span><span>maximum flaky rate</span><span>zero-tolerance codes</span>
+          </div>
+        </section>
+
+        <section class="doc-section" id="cli" data-title="CLI and reports">
+          <div class="section-kicker">CLI &amp; REPORTS</div>
+          <h2>Local feedback. CI artifacts. Same evidence.</h2>
+          <div class="command-line command-feature">
+            <code><span>$</span> npx llm-contract run cases.json --contract ./contract.js --runs 3</code>
+            <button type="button" class="copy-trigger" data-copy="npx llm-contract run cases.json --contract ./contract.js --runs 3">copy</button>
+          </div>
+          <div class="report-grid">
+            <article><span>{ }</span><h3>JSON</h3><p>Machine-readable automation and stored baselines.</p></article>
+            <article><span>MD</span><h3>Markdown</h3><p>Review-friendly summaries for pull requests.</p></article>
+            <article><span>▤</span><h3>HTML</h3><p>Portable reports with readable failure detail.</p></article>
+            <article><span>&gt;_</span><h3>Terminal</h3><p>Fast local output with policy status.</p></article>
+          </div>
+          <div class="callout callout-warning">
+            <span class="callout-icon">!</span>
+            <div><strong>CLI detail:</strong> running without <code>--contract</code> performs a non-empty-output smoke check. Supply a contract module for behavioral validation.</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="adapters" data-title="Adapters">
+          <div class="section-kicker">COMPOSABLE BY DESIGN</div>
+          <h2>Bring your schema. Bring your model.</h2>
+          <p class="section-lead">The core stays provider-agnostic. Optional peers unlock familiar validation, while generation remains an ordinary callback.</p>
+          <div class="adapter-table">
+            <div class="table-head"><span>adapter</span><span>import</span><span>role</span></div>
+            <div><strong>Zod</strong><code>llm-contract/adapters/zod</code><span>full Zod validation</span></div>
+            <div><strong>Valibot</strong><code>llm-contract/adapters/valibot</code><span>Valibot safe parsing</span></div>
+            <div><strong>JSON Schema</strong><code>llm-contract/adapters/json-schema</code><span>built-in deterministic subset</span></div>
+            <div><strong>Custom</strong><code>defineContract(...)</code><span>business-specific checks</span></div>
+          </div>
+          <p class="provider-note"><span>works around</span> OpenAI · Anthropic · Gemini · Ollama · LangChain · custom agents <em>through your callback</em></p>
+        </section>
+
+        <section class="doc-section" id="limits" data-title="Honest limits">
+          <div class="section-kicker">HONEST LIMITS</div>
+          <h2>Transparent checks beat magical claims.</h2>
+          <div class="limits-grid">
+            <article>
+              <span class="limit-icon">≠</span>
+              <div><h3>Not a universal truth engine</h3><p>Grounding checks compare output against context you supply. They do not verify every fact in the world.</p></div>
+            </article>
+            <article>
+              <span class="limit-icon">≈</span>
+              <div><h3>Does not remove nondeterminism</h3><p>Repeated runs measure and expose flakiness; they cannot make probabilistic models deterministic.</p></div>
+            </article>
+            <article>
+              <span class="limit-icon">⊂</span>
+              <div><h3>JSON Schema is a subset</h3><p>The built-in adapter intentionally covers a deterministic subset. Use Zod, Valibot, or custom logic for more.</p></div>
+            </article>
+            <article>
+              <span class="limit-icon">◎</span>
+              <div><h3>Deterministic-first, not deterministic-only</h3><p>Probabilistic judge signals can be added separately without overwriting hard failures.</p></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="doc-section" id="faq" data-title="FAQ">
+          <div class="section-kicker">FAQ</div>
+          <h2>Before you install.</h2>
+          <div class="faq-list">
+            <details>
+              <summary>What problem does llm-contract solve?<span>+</span></summary>
+              <p>It turns expected AI behavior into reusable checks, runs those checks across datasets, compares results with a baseline, measures stability, and produces evidence CI can enforce.</p>
+            </details>
+            <details>
+              <summary>Does it depend on a specific model provider?<span>+</span></summary>
+              <p>No. Evaluate any output string directly or pass your own generation function to a suite. This keeps credentials, provider SDKs, tracing, and retry behavior under your control.</p>
+            </details>
+            <details>
+              <summary>Can it test RAG answers and AI agents?<span>+</span></summary>
+              <p>Yes. Contracts can compare claims against supplied retrieval context and check behaviors such as required topics, clarification, refusal, citations, forbidden phrases, or custom business rules.</p>
+            </details>
+            <details>
+              <summary>Is it ready for production workflows?<span>+</span></summary>
+              <p>Version 0.9.0 includes a typed API, CLI, suite runner, policies, reporters, examples, and CI across Node 18, 20, 22, and 24. As a pre-1.0 release, review version changes before upgrading.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="final-cta">
+          <div class="cta-grid" aria-hidden="true"></div>
+          <span class="section-kicker">SHIP WITH EVIDENCE</span>
+          <h2>Your next AI change should come with a contract.</h2>
+          <p>Open source. MIT licensed. Install from npm and run your first real case.</p>
+          <div class="hero-actions centered">
+            <button class="install-command copy-trigger" type="button" data-copy="npm install llm-contract">
+              <span class="terminal-dollar">$</span><code>npm install llm-contract</code><span class="copy-state">copy</span>
+            </button>
+            <a class="button button-primary" href="https://github.com/alivirgo/LLM-Contract">Star on GitHub ↗</a>
+          </div>
+        </section>
+
+        <footer>
+          <div>
+            <a class="brand footer-brand" href="#overview"><span class="brand-prompt">$</span> llm-contract</a>
+            <p>Behavioral contract testing and regression evaluation for AI systems.</p>
+          </div>
+          <nav aria-label="Footer navigation">
+            <a href="https://www.npmjs.com/package/llm-contract">npm</a>
+            <a href="https://github.com/alivirgo/LLM-Contract">GitHub</a>
+            <a href="https://github.com/alivirgo/LLM-Contract/releases">Releases</a>
+            <a href="https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56">Article</a>
+            <a href="./llms.txt">llms.txt</a>
+          </nav>
+          <span>© <span id="year">2026</span> Ali Virgo · MIT</span>
+        </footer>
+      </main>
+
+      <aside class="toc" aria-label="On this page">
+        <p>ON THIS PAGE</p>
+        <a href="#overview">Overview</a>
+        <a href="#quickstart">Quickstart</a>
+        <a href="#contract">Contract anatomy</a>
+        <a href="#layers">Validation layers</a>
+        <a href="#regression">Regression suites</a>
+        <a href="#ci">CI policies</a>
+        <a href="#cli">CLI &amp; reports</a>
+        <a href="#limits">Honest limits</a>
+        <a href="#faq">FAQ</a>
+        <div class="toc-meta"><span>VERSION</span><b>0.9.0</b><span>LICENSE</span><b>MIT</b></div>
+      </aside>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+    <script src="./script.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+# llm-contract
+
+> An open-source TypeScript library and CLI for deterministic-first LLM evaluation, AI agent testing, prompt regression, RAG grounding checks, structured-output validation, flakiness tracking, and CI gates.
+
+llm-contract lets developers define reusable behavioral requirements for AI output, evaluate generated text, run real datasets repeatedly, compare current results with historical baselines, and enforce explicit quality policies in CI.
+
+## Canonical resources
+
+- Documentation: https://alivirgo.github.io/LLM-Contract/
+- npm package: https://www.npmjs.com/package/llm-contract
+- GitHub repository: https://github.com/alivirgo/LLM-Contract
+- v0.9.0 release: https://github.com/alivirgo/LLM-Contract/releases/tag/v0.9.0
+- Launch article: https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56
+- License: MIT
+
+## Install
+
+```bash
+npm install llm-contract
+```
+
+Requires Node.js 18.18 or newer. The package exports ESM, CommonJS, and TypeScript declarations.
+
+## Primary API
+
+- `defineContract()` defines normalization, schema validation, hard invariants, and weighted assertions.
+- `evaluate()` checks one output and returns structured checks, failures, warnings, evidence, and scores.
+- `runSuite()` evaluates datasets through a caller-provided generation function and supports repeated runs.
+- `compareWithBaseline()` detects regressions, fixes, score changes, and failure-code changes.
+- `analyzeStability()` reports mixed outcomes and stability scores without retry-until-pass behavior.
+- `evaluatePolicy()` converts explicit pass-rate, regression, flakiness, score, and failure-code thresholds into CI status.
+
+## Validation capabilities
+
+- Syntactic: JSON parsing and code-block checks.
+- Structural: Zod, Valibot, and an intentional JSON Schema subset.
+- Semantic: numeric ranges, enums, duplicates, custom rules, and required topics.
+- Grounding: selected fact/entity preservation, unsupported salient claims, explicit contradiction patterns, and citation-marker checks against supplied context.
+- Behavioral: clarification, refusal, false refusal, forbidden phrases, required topics, and custom invariants.
+- Reporting: terminal, JSON, Markdown, and self-contained HTML.
+
+## Important boundaries
+
+- The package does not make hidden model or network calls. Callers provide output or a generation callback.
+- Grounding checks compare output with supplied context; they are not universal truth verification.
+- Citation assertions verify configured markers, patterns, or strings, not whether an external source is authentic.
+- The built-in JSON Schema adapter implements a deterministic subset, not the entire specification.
+- Repeated runs measure nondeterminism; they do not eliminate it.
+- Version 0.9.0 is a pre-1.0 release.
+
+## Best source for implementation details
+
+Read the repository README, exported TypeScript declarations, examples, and test suite at https://github.com/alivirgo/LLM-Contract.

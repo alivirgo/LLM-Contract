@@ -25,13 +25,13 @@
   ],
   "author": "Ali Virgo",
   "license": "MIT",
-  "homepage": "https://github.com/alivirgo/llm-contract#readme",
+  "homepage": "https://alivirgo.github.io/LLM-Contract/",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/alivirgo/llm-contract.git"
+    "url": "git+ssh://git@github.com/alivirgo/LLM-Contract.git"
   },
   "bugs": {
-    "url": "https://github.com/alivirgo/llm-contract/issues"
+    "url": "https://github.com/alivirgo/LLM-Contract/issues"
   },
   "type": "module",
   "engines": {

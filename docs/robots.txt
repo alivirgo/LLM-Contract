@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alivirgo.github.io/LLM-Contract/sitemap.xml
