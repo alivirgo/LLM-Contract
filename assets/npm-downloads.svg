@@ -5,7 +5,7 @@
   </defs>
   <rect width="820" height="260" rx="14" fill="url(#bg)"/>
   <text x="28" y="35" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="19" font-weight="700">llm-contract · daily npm downloads</text>
-  <text x="28" y="59" fill="#8b949e" font-family="Arial, sans-serif" font-size="13">Last 30 days · 0 downloads · updated 2026-09-01 06:33 UTC</text>
+  <text x="28" y="59" fill="#8b949e" font-family="Arial, sans-serif" font-size="13">Last 30 days · 0 downloads · updated 2026-09-01 06:36 UTC</text>
   <line x1="52" y1="76" x2="52" y2="204" stroke="#30363d"/>
   <line x1="52" y1="204" x2="790" y2="204" stroke="#30363d"/>
   
