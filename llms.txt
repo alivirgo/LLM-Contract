@@ -1,5 +1,12 @@
 # llm-contract
 
+## Fastest setup
+
+Run `npm install llm-contract`, `npx llm-contract init`, then `npm run test:ai`.
+The initializer creates a runnable suite, a package script, and optional
+instructions for Cursor, Codex, Claude, Gemini, Antigravity, and other
+repository-aware coding agents. It makes no network calls.
+
 > TypeScript behavioral contract testing and regression detection for LLMs, AI agents, prompts, model changes, and RAG pipelines.
 
 Package: llm-contract

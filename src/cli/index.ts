@@ -2,6 +2,7 @@ import { runCommand } from './commands/run.js';
 import { compareCommand } from './commands/compare.js';
 import { reportCommand } from './commands/report.js';
 import { validateCommand } from './commands/validate.js';
+import { initCommand } from './commands/init.js';
 
 interface ParsedArgs {
   flags: Record<string, string | boolean>;
@@ -17,7 +18,7 @@ export async function runCli(argv: string[]): Promise<number> {
   }
 
   if (command === '--version' || command === '-v') {
-    console.log('llm-contract v0.9.0');
+    console.log('llm-contract v0.10.0');
     return 0;
   }
 
@@ -25,6 +26,13 @@ export async function runCli(argv: string[]): Promise<number> {
 
   try {
     switch (command) {
+      case 'init':
+        return await initCommand({
+          directory: getString(flags, '--dir', '-d') || positionals[0],
+          force: Boolean(flags['--force']),
+          agents: !Boolean(flags['--no-agents']),
+        });
+
       case 'run': {
         const suitePath = getString(flags, '--suite', '-s') || positionals[0];
         if (!suitePath) {
@@ -139,6 +147,7 @@ Usage:
   llm-contract <command> [options]
 
 Commands:
+  init       Create a runnable starter suite and instructions for AI coding agents
   run        Run behavioral contracts across a dataset of test cases
   compare    Compare current evaluation run against historical baseline to detect regressions
   report     Convert saved JSON evaluation run into HTML, Markdown, or terminal report
@@ -167,6 +176,8 @@ Options for 'report':
   --output, -o <path>         Write formatted output to file
 
 Examples:
+  npx llm-contract init
+  npm run test:ai
   llm-contract run --suite ./cases.json --contract ./contract.mjs --baseline ./baseline.json --preset standard
   llm-contract compare --baseline ./run-v1.json --current ./run-v2.json
   llm-contract report --file ./run.json --format html --output ./report.html

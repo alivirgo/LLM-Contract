@@ -24,6 +24,20 @@ describe('CLI Integration Tests', () => {
     expect(code).toBe(0);
   });
 
+  it('llm-contract init creates a runnable starter without overwriting files', async () => {
+    const initDir = path.join(tmpDir, 'init-project');
+    await fs.rm(initDir, { recursive: true, force: true });
+    await fs.mkdir(initDir, { recursive: true });
+    await fs.writeFile(path.join(initDir, 'package.json'), JSON.stringify({ scripts: {} }), 'utf8');
+
+    expect(await runCli(['init', '--dir', initDir])).toBe(0);
+    expect(await fs.readFile(path.join(initDir, 'evals', 'contract.mjs'), 'utf8')).toContain('defineContract');
+    expect(await fs.readFile(path.join(initDir, 'AGENTS.md'), 'utf8')).toContain('npm run test:ai');
+    const pkg = JSON.parse(await fs.readFile(path.join(initDir, 'package.json'), 'utf8'));
+    expect(pkg.scripts['test:ai']).toContain('llm-contract run');
+    expect(await runCli(['init', '--dir', initDir])).toBe(1);
+  });
+
   it('llm-contract run should execute test cases and generate report files', async () => {
     const testCasesPath = path.join(tmpDir, 'test-cases.json');
     const htmlReportPath = path.join(tmpDir, 'report.html');

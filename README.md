@@ -53,13 +53,29 @@ graph TD
 
 ```bash
 npm install llm-contract
-# Optional schema validators:
-npm install zod
+npx llm-contract init
+npm run test:ai
 ```
+
+That is the complete first-run path. `init` creates a small executable suite in
+`evals/`, adds the `test:ai` script, and writes concise project guidance for
+Cursor, Codex, Claude, Gemini, Antigravity, and other agents that read
+`AGENTS.md`. It does not install a model SDK, make a network call, or require an
+API key. Replace the sample outputs with output captured from the AI stack you
+already use.
+
+```bash
+npx llm-contract init --dir ./my-app  # choose a project directory
+npx llm-contract init --no-agents     # skip agent instruction files
+npx llm-contract init --force         # replace initializer-owned targets
+```
+
+Optional schema validators can be added later with `npm install zod` or
+`npm install valibot`.
 
 The canonical package is [`llm-contract` on npmjs](https://www.npmjs.com/package/llm-contract). A public scoped mirror, [`@alivirgo/llm-contract`](https://github.com/users/alivirgo/packages/npm/package/llm-contract), is also published through GitHub Packages for authenticated GitHub registry workflows. Versioned tarballs are attached to [GitHub Releases](https://github.com/alivirgo/LLM-Contract/releases).
 
-### 2. Define a Behavioral Contract
+### 2. Customize the generated contract
 
 ```typescript
 import { z } from 'zod';
