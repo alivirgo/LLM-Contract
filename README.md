@@ -6,6 +6,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 
+## Daily downloads
+
+[![Daily npm downloads graph](https://raw.githubusercontent.com/alivirgo/LLM-Contract/main/assets/npm-downloads.svg)](https://www.npmjs.com/package/llm-contract)
+
+Updated automatically from npm's public download API every 12 hours.
+
 [Read the launch article: **Stop Shipping Broken AI: Contract Testing for LLMs in TypeScript**](https://medium.com/@alithetechguy/stop-shipping-broken-ai-contract-testing-for-llms-in-typescript-16e2b0e0dd56)
 
 [Explore the interactive documentation](https://alivirgo.github.io/LLM-Contract/) for the quickstart, validation pipeline, regression workflow, CI policies, reports, and honest limits.

@@ -1,6 +1,6 @@
 {
   "name": "llm-contract",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "TypeScript library and CLI for LLM evaluation, AI agent testing, prompt regression, RAG grounding, structured output, flakiness tracking, and CI gates.",
   "keywords": [
     "llm",

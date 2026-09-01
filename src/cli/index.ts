@@ -18,7 +18,7 @@ export async function runCli(argv: string[]): Promise<number> {
   }
 
   if (command === '--version' || command === '-v') {
-    console.log('llm-contract v0.10.0');
+    console.log('llm-contract v0.10.1');
     return 0;
   }
 
