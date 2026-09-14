@@ -1,3 +1,5 @@
+[![Hits](https://hits.sh/github.com/alivirgo/LLM-Contract.svg)](https://hits.sh/github.com/alivirgo/LLM-Contract/)
+
 # llm-contract
 
 [![npm version](https://img.shields.io/npm/v/llm-contract.svg)](https://www.npmjs.com/package/llm-contract)
