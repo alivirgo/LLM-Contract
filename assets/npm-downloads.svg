@@ -5,13 +5,13 @@
   </defs>
   <rect width="820" height="260" rx="14" fill="url(#bg)"/>
   <text x="28" y="35" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="19" font-weight="700">llm-contract · daily npm downloads</text>
-  <text x="28" y="59" fill="#8b949e" font-family="Arial, sans-serif" font-size="13">Last 30 days · 384 downloads · updated 2026-10-01 18:26 UTC</text>
+  <text x="28" y="59" fill="#8b949e" font-family="Arial, sans-serif" font-size="13">Last 30 days · 101 downloads · updated 2026-10-02 05:39 UTC</text>
   <line x1="52" y1="76" x2="52" y2="204" stroke="#30363d"/>
   <line x1="52" y1="204" x2="790" y2="204" stroke="#30363d"/>
-  <polygon points="52,204 52.0,76.0 77.4,196.4 102.9,204.0 128.3,199.5 153.8,200.9 179.2,199.5 204.7,204.0 230.1,204.0 255.6,202.2 281.0,203.6 306.5,203.6 331.9,204.0 357.4,201.8 382.8,202.2 408.3,204.0 433.7,204.0 459.2,200.9 484.6,204.0 510.1,198.2 535.5,204.0 561.0,202.7 586.4,204.0 611.9,202.7 637.3,203.6 662.8,203.6 688.2,202.2 713.7,202.2 739.1,202.7 764.6,203.6 790.0,204.0 790,204" fill="url(#fill)"/><polyline points="52.0,76.0 77.4,196.4 102.9,204.0 128.3,199.5 153.8,200.9 179.2,199.5 204.7,204.0 230.1,204.0 255.6,202.2 281.0,203.6 306.5,203.6 331.9,204.0 357.4,201.8 382.8,202.2 408.3,204.0 433.7,204.0 459.2,200.9 484.6,204.0 510.1,198.2 535.5,204.0 561.0,202.7 586.4,204.0 611.9,202.7 637.3,203.6 662.8,203.6 688.2,202.2 713.7,202.2 739.1,202.7 764.6,203.6 790.0,204.0" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-  <text x="16" y="81" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">285</text>
+  <polygon points="52,204 52.0,76.0 77.4,204.0 102.9,128.7 128.3,151.3 153.8,128.7 179.2,204.0 204.7,204.0 230.1,173.9 255.6,196.5 281.0,196.5 306.5,204.0 331.9,166.4 357.4,173.9 382.8,204.0 408.3,204.0 433.7,151.3 459.2,204.0 484.6,106.1 510.1,204.0 535.5,181.4 561.0,204.0 586.4,181.4 611.9,196.5 637.3,196.5 662.8,173.9 688.2,173.9 713.7,181.4 739.1,196.5 764.6,188.9 790.0,204.0 790,204" fill="url(#fill)"/><polyline points="52.0,76.0 77.4,204.0 102.9,128.7 128.3,151.3 153.8,128.7 179.2,204.0 204.7,204.0 230.1,173.9 255.6,196.5 281.0,196.5 306.5,204.0 331.9,166.4 357.4,173.9 382.8,204.0 408.3,204.0 433.7,151.3 459.2,204.0 484.6,106.1 510.1,204.0 535.5,181.4 561.0,204.0 586.4,181.4 611.9,196.5 637.3,196.5 662.8,173.9 688.2,173.9 713.7,181.4 739.1,196.5 764.6,188.9 790.0,204.0" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="16" y="81" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">17</text>
   <text x="35" y="208" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">0</text>
-  <text x="52" y="230" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">2026-09-01</text>
-  <text x="790" y="230" fill="#8b949e" text-anchor="end" font-family="Arial, sans-serif" font-size="11">2026-09-30</text>
+  <text x="52" y="230" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">2026-09-02</text>
+  <text x="790" y="230" fill="#8b949e" text-anchor="end" font-family="Arial, sans-serif" font-size="11">2026-10-01</text>
   
 </svg>
